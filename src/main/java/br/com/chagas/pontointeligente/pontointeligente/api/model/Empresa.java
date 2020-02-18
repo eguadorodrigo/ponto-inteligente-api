@@ -1,5 +1,11 @@
 package br.com.chagas.pontointeligente.pontointeligente.api.model;
 
-public class Empresa {
-    
+import lombok.Data;
+
+@Data public class Empresa {
+	
+	private String razaoSocial;
+	
+	private String cnpj;
+	    
 }

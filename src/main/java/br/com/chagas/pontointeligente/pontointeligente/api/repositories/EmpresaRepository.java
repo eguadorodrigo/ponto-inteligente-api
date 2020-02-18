@@ -5,10 +5,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import br.com.chagas.pontointeligente.pontointeligente.api.model.Empresa;
 
-@Transactional(readOnly=true)
+
 public interface EmpresaRepository extends JpaRepository<Empresa, Long>{
 
-    
+	@Transactional(readOnly=true)
     Empresa findByCnpj(String cnpj);
     
 }
