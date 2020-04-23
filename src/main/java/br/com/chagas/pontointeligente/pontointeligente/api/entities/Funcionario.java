@@ -70,7 +70,6 @@ public class Funcionario implements Serializable{
     @Column(name = "data_atualizacao", nullable = false)
     private Date dataAtualizacao;
 
-    @ToString
     @ManyToOne(fetch = FetchType.EAGER)
     private Empresa empresa;
 
