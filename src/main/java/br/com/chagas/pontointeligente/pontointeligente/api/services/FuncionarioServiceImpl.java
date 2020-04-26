@@ -2,7 +2,6 @@ package br.com.chagas.pontointeligente.pontointeligente.api.services;
 
 import java.util.Optional;
 
-import org.hibernate.criterion.Example;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,11 +13,11 @@ import br.com.chagas.pontointeligente.pontointeligente.api.repositories.Funciona
 @Service
 public class FuncionarioServiceImpl implements FuncionarioService {
 
-    public static final Logger logger = LoggerFactory.getLogger(EmpresaServiceImpl.class);
+    public static final Logger logger = LoggerFactory.getLogger(FuncionarioServiceImpl.class);
 
     @Autowired
     private FuncionarioRepository funcionarioRepository;
-    
+
     @Override
     public Funcionario persistir(Funcionario funcionario) {
         logger.info("Persistindo funcionario: {}", funcionario);
@@ -40,9 +39,7 @@ public class FuncionarioServiceImpl implements FuncionarioService {
     @Override
     public Optional<Funcionario> buscarPorId(Long id) {
         logger.info("Buscando funcionario pelo ID: {}", id);
-        Example example = Example.create(Funcionario.class);
-
-        return Optional.ofNullable(this.funcionarioRepository.findOne(id));
+        return this.funcionarioRepository.findById(id);
     }
-   
+
 }
