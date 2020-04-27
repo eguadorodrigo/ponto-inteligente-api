@@ -46,10 +46,11 @@ public class CadastroPJController {
     }
     
     /**
+     * Cadastra um funcionário pessoa jurídica no sistema.
      * 
      * @param cadastroPJDto
      * @param result 
-     * @return ResponseEntity<Response<CadastroPJDto>>
+     * @return ResponseEntity < Response< CadastroPJDto > >
      */
     @PostMapping
     public ResponseEntity<Response<CadastroPJDto>> cadastrar(@Valid @RequestBody CadastroPJDto cadastroPJDto, 
