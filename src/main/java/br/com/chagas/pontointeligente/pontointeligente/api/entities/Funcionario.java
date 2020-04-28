@@ -24,10 +24,14 @@ import javax.persistence.Transient;
 
 import br.com.chagas.pontointeligente.pontointeligente.api.enuns.PerfilEnum;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Entity
 @Table(name = "funcionario")
 @Data
+@NoArgsConstructor
+@ToString(exclude = {"empresa"})
 public class Funcionario implements Serializable{
 
     /**
@@ -84,6 +88,11 @@ public class Funcionario implements Serializable{
     @Transient
     public Optional<Float> getQtdHorasTrabalhadoDiasOpt() {
         return Optional.ofNullable(qtdHorasTrabalhoDia);
+    }
+
+    @Transient
+    public Optional<Float> getQtdHorasAlmocoOpt() {
+        return Optional.ofNullable(qtdHorasAlmoco);
     }
 
 
