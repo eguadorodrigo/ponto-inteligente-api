@@ -17,10 +17,12 @@ import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "empresa")
 @Data
+@NoArgsConstructor
 public class Empresa implements Serializable{
 	
 	/**
