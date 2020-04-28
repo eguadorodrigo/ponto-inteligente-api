@@ -20,10 +20,12 @@ import javax.persistence.TemporalType;
 
 import br.com.chagas.pontointeligente.pontointeligente.api.enuns.TipoEnum;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "lancamento")
 @Data
+@NoArgsConstructor
 public class Lancamento implements Serializable{
     /**
     *
