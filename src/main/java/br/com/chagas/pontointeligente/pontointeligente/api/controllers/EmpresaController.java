@@ -44,7 +44,7 @@ public class EmpresaController {
 
         if (!empresa.isPresent()) {
             logger.info("Empresa não encontrada para o CNPJ: {}", cnpj);
-            response.getErros().add("Empresa não encontrada para o CNPJ".concat(cnpj));
+            response.getErros().add("Empresa não encontrada para o CNPJ: ".concat(cnpj));
             return ResponseEntity.badRequest().body(response);
         }
 

@@ -14,7 +14,6 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
@@ -43,25 +42,26 @@ public class EmpresaControllerTest {
         BDDMockito.given(this.empresaService.buscarPorCnpj(Mockito.anyString())).willReturn(Optional.empty());
 
         mvc.perform(MockMvcRequestBuilders
-                .get(BUSCAR_EMPRESA_CNPJ_URL)
+                .get(BUSCAR_EMPRESA_CNPJ_URL + CNPJ)
                 .accept(MediaType.APPLICATION_JSON)
-            ).andExpect(MockMvcResultMatchers.status().isOk())
-             .andExpect(MockMvcResultMatchers.content().contentType("application/    json;charset=UTF-8"))
+            ).andExpect(MockMvcResultMatchers.status().isBadRequest())
              .andExpect(MockMvcResultMatchers.jsonPath("$.erros").value("Empresa não encontrada para o CNPJ" + CNPJ));
     }
 
     
     @Test
-    public void testBuscarEmpresaCnpjValido(){
+    public void testBuscarEmpresaCnpjValido() throws Exception {
         BDDMockito.given(this.empresaService.buscarPorCnpj(Mockito.anyString()))
                 .willReturn(Optional.of(this.obterDadosEmpresa()));
 
-        mvc.perform(((ResultActions) MockMvcRequestBuilders
-                .get(BUSCAR_EMPRESA_CNPJ_URL)
+        mvc.perform(MockMvcRequestBuilders
+                .get(BUSCAR_EMPRESA_CNPJ_URL + CNPJ)
                 .accept(MediaType.APPLICATION_JSON  
             )).andExpect(MockMvcResultMatchers.status().isOk())
              .andExpect(MockMvcResultMatchers.jsonPath("$.data.id").value(ID))
-             .andExpect(MockMvcResultMatchers.jsonPath("$.data.razaoSocial").value(RAZAO_SOCIAL)));
+             .andExpect(MockMvcResultMatchers.jsonPath("$.data.razaoSocial").value(RAZAO_SOCIAL))
+             .andExpect(MockMvcResultMatchers.jsonPath("$.data.cnpj").value(CNPJ))
+             .andExpect(MockMvcResultMatchers.jsonPath("$.erros").isEmpty());
     }
 
     private Empresa obterDadosEmpresa() {
