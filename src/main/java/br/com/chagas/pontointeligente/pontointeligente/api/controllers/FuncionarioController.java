@@ -48,7 +48,7 @@ public class FuncionarioController {
      * @return ResponseEntity< Response < FuncionarioDto > >
      * @throws NoSuchAlgorithmException
      */
-    @PutMapping(value="path/{id}")
+    @PutMapping(value="/{id}")
     public ResponseEntity<Response<FuncionarioDto>> atualizar(@PathVariable Long id, @Valid @RequestBody FuncionarioDto funcionarioDto, BindingResult result) throws NoSuchAlgorithmException {
                 logger.info("Atualizar funcionario {}",funcionarioDto.toString());
                 Response<FuncionarioDto> response = new Response<FuncionarioDto>();
