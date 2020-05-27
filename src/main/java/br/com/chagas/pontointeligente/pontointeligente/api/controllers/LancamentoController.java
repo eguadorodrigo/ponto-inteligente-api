@@ -72,7 +72,7 @@ public class LancamentoController {
         logger.info("Bucando lançamentos por ID do funcionario: {}, página {}", funcionarioId, pag);
         Response<Page<LancamentoDto>> response = new Response<Page<LancamentoDto>>();
 
-        PageRequest pageRequest = new PageRequest(pag, this.qtdPorPagina, Direction.valueOf(dir), ord);
+        PageRequest pageRequest = PageRequest.of(pag, this.qtdPorPagina, Direction.valueOf(dir), ord);
         Page<Lancamento> lancamentos = this.lancamentoService.buscarFuncionarioId(funcionarioId, pageRequest);
         Page<LancamentoDto> lancamentoDto = lancamentos.map(lancamento -> this.converterLancamentoDto(lancamento));
         response.setData(lancamentoDto);
