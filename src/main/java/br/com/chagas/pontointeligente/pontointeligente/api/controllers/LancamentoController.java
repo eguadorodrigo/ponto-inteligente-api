@@ -15,6 +15,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -94,7 +95,7 @@ public class LancamentoController {
 
         if (!lancamento.isPresent()) {
             logger.info("Lançamento não encontrado para o ID: {}", id);
-            response.getErros().add("Lançamento não encontrado para o id" + id);
+            response.getErrors().add("Lançamento não encontrado para o id" + id);
             return ResponseEntity.badRequest().body(response);
         }
 
@@ -122,7 +123,7 @@ public class LancamentoController {
 
         if (result.hasErrors()) {
             logger.info("Erro validando lançamento: {}", result.getAllErrors());
-            result.getAllErrors().forEach(error -> response.getErros().add(error.getDefaultMessage()));
+            result.getAllErrors().forEach(error -> response.getErrors().add(error.getDefaultMessage()));
             return ResponseEntity.badRequest().body(response);
         }
 
@@ -151,7 +152,7 @@ public class LancamentoController {
 
         if (result.hasErrors()) {
             logger.info("Erro validando lançamento: {}", result.getAllErrors());
-            result.getAllErrors().forEach(error -> response.getErros().add(error.getDefaultMessage()));
+            result.getAllErrors().forEach(error -> response.getErrors().add(error.getDefaultMessage()));
             return ResponseEntity.badRequest().body(response);
         }
 
@@ -167,6 +168,7 @@ public class LancamentoController {
      * @return ResponseEntity<Response<String>>
      */
     @DeleteMapping(value = "/{id}")
+    @PreAuthorize("hasAnyRole('ADMIN')")
     public ResponseEntity<Response<String>> remover(@PathVariable("id") Long id) {
         logger.info("Removendo lançamento: {}", id);
         Response<String> response = new Response<String>();
@@ -174,7 +176,7 @@ public class LancamentoController {
 
         if (lancamento.isPresent()) {
             logger.info("Erro ao remover lançamento. ID: {} inválido.", id);
-            response.getErros().add("Erro ao remover lançamento. Registro não encontrado para o id " + id);
+            response.getErrors().add("Erro ao remover lançamento. Registro não encontrado para o id " + id);
             return ResponseEntity.badRequest().body(response);
         }
 

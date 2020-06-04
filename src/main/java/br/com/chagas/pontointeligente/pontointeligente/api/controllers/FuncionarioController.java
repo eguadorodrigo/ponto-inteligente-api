@@ -63,7 +63,7 @@ public class FuncionarioController {
 
                 if(result.hasErrors()){
                     logger.error("Erro validando funcionario {}", result.getAllErrors());
-                    result.getAllErrors().forEach(error -> response.getErros().add(error.getDefaultMessage()));
+                    result.getAllErrors().forEach(error -> response.getErrors().add(error.getDefaultMessage()));
                     return ResponseEntity.badRequest().body(response);
                 }
 

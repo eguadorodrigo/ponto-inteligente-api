@@ -11,6 +11,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
@@ -34,10 +35,11 @@ public class EmpresaControllerTest {
 
     private static final String BUSCAR_EMPRESA_CNPJ_URL = "/api/empresas/cnpj/";
     private static final Long ID = Long.valueOf(1);
-    private static final String CNPJ = "123465000187";
+    private static final String CNPJ = "12520006000179";
     private static final String RAZAO_SOCIAL = "Empresa XYZ";
 
     @Test
+    @WithMockUser
     public void testBuscarEmpresaCnpjInvalido() throws Exception{
         BDDMockito.given(this.empresaService.buscarPorCnpj(Mockito.anyString())).willReturn(Optional.empty());
 
@@ -45,11 +47,12 @@ public class EmpresaControllerTest {
                 .get(BUSCAR_EMPRESA_CNPJ_URL + CNPJ)
                 .accept(MediaType.APPLICATION_JSON)
             ).andExpect(MockMvcResultMatchers.status().isBadRequest())
-             .andExpect(MockMvcResultMatchers.jsonPath("$.erros").value("Empresa não encontrada para o CNPJ" + CNPJ));
+             .andExpect(MockMvcResultMatchers.jsonPath("$.erros").value("Empresa não encontrada para o CNPJ: " + CNPJ));
     }
 
     
     @Test
+    @WithMockUser
     public void testBuscarEmpresaCnpjValido() throws Exception {
         BDDMockito.given(this.empresaService.buscarPorCnpj(Mockito.anyString()))
                 .willReturn(Optional.of(this.obterDadosEmpresa()));

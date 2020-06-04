@@ -10,16 +10,16 @@ public class Response<T> {
     
     private T data;
     
-    private List<String> erros;
+    private List<String> errors;
 
     /**
      * Conversão incluída somente para controle da lista caso seja nula
      * @return List<String>
      */
-    public List<String> getErros(){
-        if (this.erros == null) {
-            this.erros = new ArrayList<String>();            
+    public List<String> getErrors(){
+        if (this.errors == null) {
+            this.errors = new ArrayList<String>();            
         }
-        return erros;
+        return errors;
     } 
 }
