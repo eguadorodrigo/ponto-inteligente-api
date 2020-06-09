@@ -1,6 +1,7 @@
 package br.com.chagas.pontointeligente.pontointeligente.api.controllers;
 
 import java.security.NoSuchAlgorithmException;
+import java.util.Date;
 
 import javax.validation.Valid;
 
@@ -120,6 +121,7 @@ public class CadastroPJController {
         funcionario.setCpf(cadastroPJDto.getCpf());
         funcionario.setPerfil(PerfilEnum.ROLE_ADMIN);
         funcionario.setSenha(PasswordUtils.gerarBCrypt(cadastroPJDto.getSenha()));
+        funcionario.setDataCriacao(new Date());
 
         return funcionario;
     }

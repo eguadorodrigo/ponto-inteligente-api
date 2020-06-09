@@ -20,6 +20,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 
 import br.com.chagas.pontointeligente.pontointeligente.api.enuns.PerfilEnum;
@@ -31,8 +33,8 @@ import lombok.ToString;
 @Table(name = "funcionario")
 @Data
 @NoArgsConstructor
-@ToString(exclude = {"empresa"})
-public class Funcionario implements Serializable{
+@ToString(exclude = { "empresa" })
+public class Funcionario implements Serializable {
 
     /**
      *
@@ -42,14 +44,14 @@ public class Funcionario implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    
+
     @Column(name = "nome", nullable = false)
     private String nome;
-    
+
     @Column(name = "email")
     private String email;
 
-    @Column(name = "senha" , nullable = false)
+    @Column(name = "senha", nullable = false)
     private String senha;
 
     @Column(name = "cpf", nullable = false)
@@ -58,7 +60,7 @@ public class Funcionario implements Serializable{
     @Column(name = "valor_hora", nullable = true)
     private BigDecimal valorHora;
 
-    @Column(name = "qtd_hora_trabalho_dia", nullable = true)
+    @Column(name = "qtd_horas_trabalho_dia", nullable = true)
     private Float qtdHorasTrabalhoDia;
 
     @Column(name = "qtd_horas_almoco", nullable = true)
@@ -67,10 +69,12 @@ public class Funcionario implements Serializable{
     @Enumerated(EnumType.STRING)
     @Column(name = "perfil", nullable = false)
     private PerfilEnum perfil;
-    
-    @Column(name = "data_cricao", nullable = false)
+
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "data_criacao", nullable = false)
     private Date dataCriacao;
 
+    @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "data_atualizacao", nullable = false)
     private Date dataAtualizacao;
 
@@ -95,16 +99,15 @@ public class Funcionario implements Serializable{
         return Optional.ofNullable(qtdHorasAlmoco);
     }
 
-
     @PreUpdate
-	public void PreUpdate(){
-		dataAtualizacao =  new Date();
-	}
+    public void PreUpdate() {
+        dataAtualizacao = new Date();
+    }
 
-	@PrePersist
-	public void PrePersist(){
-		final Date atual = new Date();
-		dataCriacao = atual;
-		dataAtualizacao = atual;
-	}
+    @PrePersist
+    public void PrePersist() {
+        final Date atual = new Date();
+        dataCriacao = atual;
+        dataAtualizacao = atual;
+    }
 }
