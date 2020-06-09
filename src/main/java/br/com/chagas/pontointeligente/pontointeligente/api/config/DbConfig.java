@@ -1,4 +1,4 @@
-package br.com.chagas.pontointeligente.pontointeligente.api.utils;
+package br.com.chagas.pontointeligente.pontointeligente.api.config;
 
 import javax.sql.DataSource;
 

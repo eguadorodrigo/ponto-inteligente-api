@@ -1,4 +1,4 @@
-package br.com.chagas.pontointeligente.pontointeligente.api.utils;
+package br.com.chagas.pontointeligente.pontointeligente.api.security.utils;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -15,10 +15,16 @@ import io.jsonwebtoken.SignatureAlgorithm;
 @Component
 public class JwtTokenUtil {
     static final String CLAIM_KEY_USERNAME = "sub";
+    
     static final String CLAIM_KEY_ROLE = "role";
+    
+    static final String CLAIM_KEY_AUDIENCE = "audience";
+    
     static final String CLAIM_KEY_CREATED = "created";
+    
     @Value("${jwt.secret}")
     private String secret;
+    
     @Value("${jwt.expiration}")
     private Long expiration;
 

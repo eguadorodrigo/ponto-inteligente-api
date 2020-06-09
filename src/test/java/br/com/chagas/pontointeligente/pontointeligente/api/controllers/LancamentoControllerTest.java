@@ -68,7 +68,7 @@ public class LancamentoControllerTest {
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data.tipo").value(TIPO))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data.data").value(this.dateFormat.format(DATA)))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data.funcionarioId").value(ID_FUNCIONARIO))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.erros").isEmpty());
+                .andExpect(MockMvcResultMatchers.jsonPath("$.errors").isEmpty());
 
     }
 
@@ -83,7 +83,7 @@ public class LancamentoControllerTest {
             .contentType(MediaType.APPLICATION_JSON)
             .accept(MediaType.APPLICATION_JSON))
             .andExpect(MockMvcResultMatchers.status().isBadRequest())
-            .andExpect(MockMvcResultMatchers.jsonPath("$.erros").value("Funcionario não encontrado. ID inexistente."))
+            .andExpect(MockMvcResultMatchers.jsonPath("$.errors").value("Funcionario não encontrado. ID inexistente."))
             .andExpect(MockMvcResultMatchers.jsonPath("$.data").isEmpty());
                 
 

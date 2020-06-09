@@ -15,11 +15,12 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.web.filter.OncePerRequestFilter;
 
-import br.com.chagas.pontointeligente.pontointeligente.api.utils.JwtTokenUtil;
+import br.com.chagas.pontointeligente.pontointeligente.api.security.utils.JwtTokenUtil;
 
 public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
     private static final String AUTH_HEADER = "Authorization";
     private static final String BEARER_PREFIX = "Bearer ";
+    
     @Autowired
     private UserDetailsService userDetailsService;
     @Autowired

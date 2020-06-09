@@ -15,8 +15,4 @@ public class JwtAuthenticationDto {
     @NotEmpty(message = "Senha não pode ser vazia.")
     private String senha;
 
-    public JwtAuthenticationDto(){
-        
-    }
-
 }

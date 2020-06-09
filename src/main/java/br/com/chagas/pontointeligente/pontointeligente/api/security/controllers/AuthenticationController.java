@@ -26,7 +26,7 @@ import org.springframework.web.bind.annotation.RestController;
 import br.com.chagas.pontointeligente.pontointeligente.api.response.Response;
 import br.com.chagas.pontointeligente.pontointeligente.api.security.dto.JwtAuthenticationDto;
 import br.com.chagas.pontointeligente.pontointeligente.api.security.dto.TokenDto;
-import br.com.chagas.pontointeligente.pontointeligente.api.utils.JwtTokenUtil;
+import br.com.chagas.pontointeligente.pontointeligente.api.security.utils.JwtTokenUtil;
 
 @RestController
 @RequestMapping("/auth")
@@ -67,7 +67,7 @@ public class AuthenticationController {
         UserDetails userDetails = userDetailsService.loadUserByUsername(authenticationDto.getEmail());
         String token = jwtTokenUtil.obterToken(userDetails);
         response.setData(new TokenDto(token));
-        return ResponseEntity.ok(response);
+        return ResponseEntity.ok(response); 
     }
 
     /**
